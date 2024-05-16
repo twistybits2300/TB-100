@@ -20,13 +20,16 @@ struct TranscriptionView: View {
                     Text("transcribing…")
                         .font(.title2)
                 } else if let text = viewModel.transcriptionText {
-                    HStack {
+                    VStack(spacing: 5) {
+                        Text("Transcribed Text")
+                            .font(.title3)
                         Text(text)
                             .multilineTextAlignment(.leading)
                             .textSelection(.enabled)
+                            .padding()
+                            .border(.gray)
                         Image(systemName: "list.clipboard.fill")
                             .imageScale(.large)
-                            .padding(.leading, 20)
                             .onTapGesture {
                                 viewModel.copyTranscribedTextToClipboard()
                             }
