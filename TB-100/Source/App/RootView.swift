@@ -6,8 +6,8 @@ struct RootView: View {
     
     var body: some View {
         VStack {
-            if let fileURL = fileDrop.droppedFileURL {
-                Text("dropped \(fileURL.lastPathComponent)")
+            if viewModel.isFileDropped {
+                DroppedFileView()
             } else {
                 DropPromptView()
             }

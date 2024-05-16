@@ -4,6 +4,10 @@ import SwiftUI
 /// View model serving the `RootView`
 final class RootViewModel {
     var fileDrop = AudioFileDrop()
+    
+    var isFileDropped: Bool {
+        fileDrop.droppedFileURL != nil
+    }
 }
 
 // MARK: - EnvironmentValues
