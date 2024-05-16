@@ -8,10 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		F867BE5A2BF6631600BF1BC1 /* TB_100App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867BE592BF6631600BF1BC1 /* TB_100App.swift */; };
-		F867BE5C2BF6631600BF1BC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867BE5B2BF6631600BF1BC1 /* ContentView.swift */; };
+		F867BE5C2BF6631600BF1BC1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867BE5B2BF6631600BF1BC1 /* RootView.swift */; };
 		F867BE5E2BF6631700BF1BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F867BE5D2BF6631700BF1BC1 /* Assets.xcassets */; };
 		F867BE612BF6631700BF1BC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F867BE602BF6631700BF1BC1 /* Preview Assets.xcassets */; };
 		F867BE722BF663CB00BF1BC1 /* TB_100Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F867BE712BF663CB00BF1BC1 /* TB_100Tests.swift */; };
+		F8FCF4C72BF66E7C008F3E02 /* AudioFileDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FCF4C52BF66E7C008F3E02 /* AudioFileDrop.swift */; };
+		F8FCF4C92BF66EAA008F3E02 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FCF4C82BF66EAA008F3E02 /* RootViewModel.swift */; };
+		F8FCF4CC2BF67D20008F3E02 /* DropPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FCF4CB2BF67D20008F3E02 /* DropPromptView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,12 +30,15 @@
 /* Begin PBXFileReference section */
 		F867BE562BF6631600BF1BC1 /* TB-100.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TB-100.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F867BE592BF6631600BF1BC1 /* TB_100App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TB_100App.swift; sourceTree = "<group>"; };
-		F867BE5B2BF6631600BF1BC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F867BE5B2BF6631600BF1BC1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		F867BE5D2BF6631700BF1BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F867BE602BF6631700BF1BC1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F867BE622BF6631700BF1BC1 /* TB_100.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TB_100.entitlements; sourceTree = "<group>"; };
 		F867BE6F2BF663CB00BF1BC1 /* TB-100Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TB-100Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F867BE712BF663CB00BF1BC1 /* TB_100Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TB_100Tests.swift; sourceTree = "<group>"; };
+		F8FCF4C52BF66E7C008F3E02 /* AudioFileDrop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFileDrop.swift; sourceTree = "<group>"; };
+		F8FCF4C82BF66EAA008F3E02 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		F8FCF4CB2BF67D20008F3E02 /* DropPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropPromptView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				F867BE6A2BF6635100BF1BC1 /* App */,
+				F8FCF4C62BF66E7C008F3E02 /* Audio File */,
+				F8FCF4CA2BF67D07008F3E02 /* Views */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -110,7 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				F867BE592BF6631600BF1BC1 /* TB_100App.swift */,
-				F867BE5B2BF6631600BF1BC1 /* ContentView.swift */,
+				F8FCF4C82BF66EAA008F3E02 /* RootViewModel.swift */,
+				F867BE5B2BF6631600BF1BC1 /* RootView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -121,6 +130,22 @@
 				F867BE712BF663CB00BF1BC1 /* TB_100Tests.swift */,
 			);
 			path = "TB-100Tests";
+			sourceTree = "<group>";
+		};
+		F8FCF4C62BF66E7C008F3E02 /* Audio File */ = {
+			isa = PBXGroup;
+			children = (
+				F8FCF4C52BF66E7C008F3E02 /* AudioFileDrop.swift */,
+			);
+			path = "Audio File";
+			sourceTree = "<group>";
+		};
+		F8FCF4CA2BF67D07008F3E02 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8FCF4CB2BF67D20008F3E02 /* DropPromptView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,8 +252,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F867BE5C2BF6631600BF1BC1 /* ContentView.swift in Sources */,
+				F867BE5C2BF6631600BF1BC1 /* RootView.swift in Sources */,
 				F867BE5A2BF6631600BF1BC1 /* TB_100App.swift in Sources */,
+				F8FCF4C92BF66EAA008F3E02 /* RootViewModel.swift in Sources */,
+				F8FCF4C72BF66E7C008F3E02 /* AudioFileDrop.swift in Sources */,
+				F8FCF4CC2BF67D20008F3E02 /* DropPromptView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
