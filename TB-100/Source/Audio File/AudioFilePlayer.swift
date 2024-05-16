@@ -36,6 +36,11 @@ final class AudioFilePlayer: NSObject {
         audioPlayer?.stop()
         teardownAudioPlayer()
     }
+    
+    /// Resets to the default state.
+    func reset() {
+        teardownAudioPlayer()
+    }
 
     // MARK: - Utilities
     private func configureAudioPlayer(url: URL) throws {

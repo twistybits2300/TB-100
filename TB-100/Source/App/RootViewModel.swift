@@ -130,6 +130,13 @@ final class RootViewModel {
         text.putOnPasteboard()
         didCopyToClipboard = true
     }
+    
+    func resetForAnotherDrop() {
+        fileDrop.reset()
+        player.reset()
+        transcriber?.reset()
+        didCopyToClipboard = false
+    }
 }
 
 // MARK: - EnvironmentValues

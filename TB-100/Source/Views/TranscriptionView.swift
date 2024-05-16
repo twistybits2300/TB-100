@@ -12,6 +12,10 @@ struct TranscriptionView: View {
                     Label("Transcribe", systemImage: "waveform")
                 }
                 .disabled(viewModel.isTranscribing)
+            } else {
+                Button(action: viewModel.resetForAnotherDrop) {
+                    Label("Reset", systemImage: "x.square.fill")
+                }
             }
 
             Spacer()
@@ -23,11 +27,13 @@ struct TranscriptionView: View {
                     VStack(spacing: 5) {
                         Text("Transcribed Text")
                             .font(.title3)
-                        Text(text)
-                            .multilineTextAlignment(.leading)
-                            .textSelection(.enabled)
-                            .padding()
-                            .border(.gray)
+                        ScrollView {
+                            Text(text)
+                                .multilineTextAlignment(.leading)
+                                .textSelection(.enabled)
+                                .padding()
+                                .border(.gray)
+                        }
                         Image(systemName: "list.clipboard.fill")
                             .imageScale(.large)
                             .onTapGesture {

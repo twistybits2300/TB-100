@@ -30,6 +30,11 @@ final class AudioFileDrop {
             droppedFileURL = url
         }
     }
+    
+    /// Resets to the default state.
+    func reset() {
+        droppedFileURL = nil
+    }
 
     // MARK: - Utilities
     private func isAudioFileExtension(_ pathExtension: String) -> Bool {
