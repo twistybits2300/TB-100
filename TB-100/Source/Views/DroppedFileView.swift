@@ -7,7 +7,14 @@ struct DroppedFileView: View {
     var body: some View {
         VStack {
             if let fileURL = fileDrop.droppedFileURL {
-                Text("'\(fileURL.lastPathComponent)' was dropped")
+                HStack {
+                    Text("'\(fileURL.lastPathComponent)' was dropped")
+                    Image(systemName: viewModel.playerImageName)
+                        .imageScale(.large)
+                        .onTapGesture {
+                            viewModel.playDroppedAudioFile()
+                        }
+                }
             }
         }
     }

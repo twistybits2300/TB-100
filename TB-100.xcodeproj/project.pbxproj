@@ -16,6 +16,7 @@
 		F8FCF4C92BF66EAA008F3E02 /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FCF4C82BF66EAA008F3E02 /* RootViewModel.swift */; };
 		F8FCF4CC2BF67D20008F3E02 /* DropPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FCF4CB2BF67D20008F3E02 /* DropPromptView.swift */; };
 		F8FCF4CE2BF67EFB008F3E02 /* DroppedFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FCF4CD2BF67EFB008F3E02 /* DroppedFileView.swift */; };
+		F8FCF4D02BF67FCD008F3E02 /* AudioFilePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FCF4CF2BF67FCD008F3E02 /* AudioFilePlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		F8FCF4C82BF66EAA008F3E02 /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
 		F8FCF4CB2BF67D20008F3E02 /* DropPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropPromptView.swift; sourceTree = "<group>"; };
 		F8FCF4CD2BF67EFB008F3E02 /* DroppedFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppedFileView.swift; sourceTree = "<group>"; };
+		F8FCF4CF2BF67FCD008F3E02 /* AudioFilePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFilePlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				F8FCF4C52BF66E7C008F3E02 /* AudioFileDrop.swift */,
+				F8FCF4CF2BF67FCD008F3E02 /* AudioFilePlayer.swift */,
 			);
 			path = "Audio File";
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				F8FCF4CE2BF67EFB008F3E02 /* DroppedFileView.swift in Sources */,
 				F867BE5A2BF6631600BF1BC1 /* TB_100App.swift in Sources */,
 				F8FCF4C92BF66EAA008F3E02 /* RootViewModel.swift in Sources */,
+				F8FCF4D02BF67FCD008F3E02 /* AudioFilePlayer.swift in Sources */,
 				F8FCF4C72BF66E7C008F3E02 /* AudioFileDrop.swift in Sources */,
 				F8FCF4CC2BF67D20008F3E02 /* DropPromptView.swift in Sources */,
 			);

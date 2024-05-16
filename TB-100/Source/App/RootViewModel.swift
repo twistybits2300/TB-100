@@ -3,10 +3,33 @@ import SwiftUI
 @Observable
 /// View model serving the `RootView`
 final class RootViewModel {
+    /// Handles drops of an audio file.
     var fileDrop = AudioFileDrop()
     
+    /// Handles the audio file playback duties.
+    var player = AudioFilePlayer()
+    
+    /// Returns `true` if the user has dropped an audio
+    /// file onto the app and it has been accepted.
     var isFileDropped: Bool {
         fileDrop.droppedFileURL != nil
+    }
+    
+    /// Returns the `systemName` to use for the play/stop icon
+    /// based on the state of `player`.
+    var playerImageName: String {
+        player.isPlaying ? "stop.fill" : "play.fill"
+    }
+    
+    // MARK: - API
+    /// Initiates playback if an audio file has been dropped on
+    /// the app and accepted.
+    func playDroppedAudioFile() {
+        guard isFileDropped else {
+            return
+        }
+        
+        player.play(filePath: fileDrop.droppedFilePath)
     }
 }
 
