@@ -1,0 +1,24 @@
+{
+  "originHash" : "f86971431a1b890bc7c3098d5e5ee7358cf3547c62fe933101f08e839ce92ef4",
+  "pins" : [
+    {
+      "identity" : "tbcommon",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twistybits2300/TBCommon.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "146b3520867bd2bed3588d2c65b4a31ecec472a8"
+      }
+    },
+    {
+      "identity" : "xscriber",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twistybits2300/Xscriber.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e441c120ecb05d1e39f26f48fb0b61d50eae74c8"
+      }
+    }
+  ],
+  "version" : 3
+}
