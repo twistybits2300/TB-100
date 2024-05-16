@@ -12,7 +12,7 @@ struct DroppedFileView: View {
                     Image(systemName: viewModel.playerImageName)
                         .imageScale(.large)
                         .onTapGesture {
-                            viewModel.playDroppedAudioFile()
+                            viewModel.togglePlayback()
                         }
                 }
             }

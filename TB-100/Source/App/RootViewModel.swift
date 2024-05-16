@@ -22,14 +22,21 @@ final class RootViewModel {
     }
     
     // MARK: - API
-    /// Initiates playback if an audio file has been dropped on
+    /// Toggles the playback of an audio file has been dropped on
     /// the app and accepted.
-    func playDroppedAudioFile() {
+    ///
+    /// If the app is currently playing audio it is stopped. Otherwise,
+    /// the playback is initiated.
+    func togglePlayback() {
         guard isFileDropped else {
             return
         }
         
-        player.play(filePath: fileDrop.droppedFilePath)
+        if player.isPlaying {
+            player.stop()
+        } else {
+            player.play(filePath: fileDrop.droppedFilePath)
+        }
     }
 }
 

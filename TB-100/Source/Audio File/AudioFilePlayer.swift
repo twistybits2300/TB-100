@@ -31,4 +31,11 @@ final class AudioFilePlayer {
             print("Error playing audio file: \(error)")
         }
     }
+    
+    /// Halts playback if we're currently playing an audio file.
+    func stop() {
+        audioPlayer?.stop()
+        audioPlayer?.currentTime = 0
+        audioPlayer = nil
+    }
 }
