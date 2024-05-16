@@ -3,7 +3,7 @@ import AVFoundation
 
 @Observable
 /// Handles playing an audio file.
-final class AudioFilePlayer {
+final class AudioFilePlayer: NSObject {
     /// Does the actual playing of the audio.
     private var audioPlayer: AVAudioPlayer? = nil
     
@@ -18,14 +18,13 @@ final class AudioFilePlayer {
     
     /// Starts the playback of the audio file at the given `filePath`. Ignored if it's `nil`.
     /// - Parameter filePath: The path of the file to be played.
-    func play(filePath: String?) {
-        guard let filePath = filePath else {
+    func play(fileURL: URL?) {
+        guard let fileURL = fileURL else {
             return
         }
         
-        let url = URL(fileURLWithPath: filePath)
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            try configureAudioPlayer(url: fileURL)
             audioPlayer?.play()
         } catch {
             print("Error playing audio file: \(error)")
@@ -35,7 +34,24 @@ final class AudioFilePlayer {
     /// Halts playback if we're currently playing an audio file.
     func stop() {
         audioPlayer?.stop()
+        teardownAudioPlayer()
+    }
+
+    // MARK: - Utilities
+    private func configureAudioPlayer(url: URL) throws {
+        audioPlayer = try AVAudioPlayer(contentsOf: url)
+        audioPlayer?.delegate = self
+    }
+    
+    private func teardownAudioPlayer() {
         audioPlayer?.currentTime = 0
         audioPlayer = nil
+    }
+}
+
+// MARK: - AVAudioPlayerDelegate
+extension AudioFilePlayer: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        teardownAudioPlayer()
     }
 }

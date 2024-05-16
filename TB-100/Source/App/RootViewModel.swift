@@ -35,7 +35,7 @@ final class RootViewModel {
         if player.isPlaying {
             player.stop()
         } else {
-            player.play(filePath: fileDrop.droppedFilePath)
+            player.play(fileURL: fileDrop.droppedFileURL)
         }
     }
 }

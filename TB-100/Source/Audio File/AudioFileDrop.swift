@@ -15,7 +15,7 @@ final class AudioFileDrop {
     /// Returns the path to the file that was dropped if `droppedFileURL` is non-`nil`,
     /// `nil` otherwise.
     var droppedFilePath: String? {
-        droppedFileURL?.path(percentEncoded: false)
+        droppedFileURL?.filePath
     }
     
     /// Accepts and processing dropped `urls`
@@ -38,5 +38,11 @@ final class AudioFileDrop {
     
     private var audioFileExtensions: [String] {
         ["mp3", "wav", "aif", "aiff", "m4a"]
+    }
+}
+
+extension URL {
+    var filePath: String {
+        self.path(percentEncoded: false)
     }
 }
