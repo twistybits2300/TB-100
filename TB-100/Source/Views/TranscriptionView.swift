@@ -20,12 +20,22 @@ struct TranscriptionView: View {
                     Text("transcribing…")
                         .font(.title2)
                 } else if let text = viewModel.transcriptionText {
-                    Text(text)
-                        .multilineTextAlignment(.leading)
-                        .textSelection(.enabled)
+                    HStack {
+                        Text(text)
+                            .multilineTextAlignment(.leading)
+                            .textSelection(.enabled)
+                        Image(systemName: "list.clipboard.fill")
+                            .imageScale(.large)
+                            .padding(.leading, 20)
+                            .onTapGesture {
+                                viewModel.copyTranscribedTextToClipboard()
+                            }
+                        Text(copyToClipboardText)
+                            .font(.caption)
+                    }
                 }
             }
-            .frame(maxWidth: 300)
+            .frame(maxWidth: 500)
 
             Spacer()
             if viewModel.isSpeechAvailable {
@@ -35,6 +45,10 @@ struct TranscriptionView: View {
         .onAppear {
             viewModel.requestSpeechRecognitionPermission()
         }
+    }
+    
+    private var copyToClipboardText: String {
+        viewModel.didCopyToClipboard ? "copied to clipboard" : "copy to clipboard"
     }
 }
 

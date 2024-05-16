@@ -1,5 +1,6 @@
 import SwiftUI
 import Xscriber
+import TBCommon
 
 @Observable
 /// View model serving the `RootView`
@@ -12,6 +13,10 @@ final class RootViewModel {
     
     /// Responsible for transcribing the text from an audio file.
     var transcriber: AudioFileTranscriber?
+    
+    /// `true` indicates the transcription text has been copied
+    /// to the clipboard.
+    var didCopyToClipboard: Bool = false
     
     // MARK: - Initialization
     /// Default initializer.
@@ -93,12 +98,20 @@ final class RootViewModel {
         }
     }
     
-    /// Assuming an audio file has been dropped, kicks 
+    /// Makes the request to the transcriber for the user's permission
+    /// to use the speech recognition services.
+    func requestSpeechRecognitionPermission() {
+        transcriber?.requestPermission()
+    }
+    
+    /// Assuming an audio file has been dropped, kicks
     /// off the transcription of the text from that file.
     func transcribeAudio() {
         guard let fileURL = fileDrop.droppedFileURL else {
             return
         }
+        
+        didCopyToClipboard = false
         
         do {
             try transcriber?.transcribe(fileURL: fileURL)
@@ -107,10 +120,15 @@ final class RootViewModel {
         }
     }
     
-    /// Makes the request to the transcriber for the user's permission
-    /// to use the speech recognition services.
-    func requestSpeechRecognitionPermission() {
-        transcriber?.requestPermission()
+    /// If there's transcription text available, it will be copied
+    /// onto the generally available clipboard.
+    func copyTranscribedTextToClipboard() {
+        guard let text = transcriber?.transcriptionText else {
+            return
+        }
+        
+        text.putOnPasteboard()
+        didCopyToClipboard = true
     }
 }
 
