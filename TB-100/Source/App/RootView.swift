@@ -7,7 +7,10 @@ struct RootView: View {
     var body: some View {
         VStack {
             if viewModel.isFileDropped {
-                DroppedFileView()
+                VStack {
+                    DroppedFileView()
+                    TranscriptionView()
+                }
             } else {
                 DropPromptView()
             }

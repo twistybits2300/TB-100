@@ -1,4 +1,5 @@
 import SwiftUI
+import Xscriber
 
 @Observable
 /// View model serving the `RootView`
@@ -8,6 +9,19 @@ final class RootViewModel {
     
     /// Handles the audio file playback duties.
     var player = AudioFilePlayer()
+    
+    /// Responsible for transcribing the text from an audio file.
+    var transcriber: AudioFileTranscriber?
+    
+    // MARK: - Initialization
+    /// Default initializer.
+    init() {
+        do {
+            self.transcriber = try AudioFileTranscriber()
+        } catch {
+            print("Unable to instantiate transcriber")
+        }
+    }
     
     /// Returns `true` if the user has dropped an audio
     /// file onto the app and it has been accepted.
@@ -19,6 +33,46 @@ final class RootViewModel {
     /// based on the state of `player`.
     var playerImageName: String {
         player.isPlaying ? "stop.fill" : "play.fill"
+    }
+    
+    /// Returns `true` if we're currently transcribing the text
+    /// from a dropped audio file.
+    var isTranscribing: Bool {
+        guard let transcriber = transcriber else {
+            return false
+        }
+        
+        return transcriber.isTranscribing
+    }
+    
+    /// Returns `true` if speech recognition services are available
+    /// on this device, `false` if not.
+    var isSpeechAvailable: Bool {
+        guard let transcriber = transcriber else {
+            return false
+        }
+        
+        return transcriber.isSpeechAvailable
+    }
+    
+    /// Returns the permission status for speech recognition.
+    var recognizerStatus: Recognizer.Status {
+        guard let transcriber = transcriber else {
+            return .notDetermined
+        }
+        
+        return transcriber.recognizerStatus
+    }
+    
+    /// The text that was transcribed from a dropped audio file.
+    var transcriptionText: String? {
+        transcriber?.transcriptionText
+    }
+    
+    /// Is non-`nil` when errors are encountered during the
+    /// transcription process.
+    var transcriberError: TranscriberError? {
+        transcriber?.error
     }
     
     // MARK: - API
@@ -37,6 +91,26 @@ final class RootViewModel {
         } else {
             player.play(fileURL: fileDrop.droppedFileURL)
         }
+    }
+    
+    /// Assuming an audio file has been dropped, kicks 
+    /// off the transcription of the text from that file.
+    func transcribeAudio() {
+        guard let fileURL = fileDrop.droppedFileURL else {
+            return
+        }
+        
+        do {
+            try transcriber?.transcribe(fileURL: fileURL)
+        } catch {
+            print("transcribe failure: \(error.localizedDescription)")
+        }
+    }
+    
+    /// Makes the request to the transcriber for the user's permission
+    /// to use the speech recognition services.
+    func requestSpeechRecognitionPermission() {
+        transcriber?.requestPermission()
     }
 }
 

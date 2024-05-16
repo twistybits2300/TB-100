@@ -1,4 +1,5 @@
 import SwiftUI
+import Xscriber
 
 /// Displayed when the user has dropped an audio file onto the app.
 struct DroppedFileView: View {
