@@ -7,7 +7,6 @@ struct TranscriptionView: View {
     
     var body: some View {
         VStack {
-            TranscriptionButtons()
             Spacer()
             TranscribedTextView()
             Spacer()
