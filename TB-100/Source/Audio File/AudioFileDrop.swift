@@ -4,36 +4,37 @@ import Foundation
 /// Oversees dropping of audio files onto the app.
 final class AudioFileDrop {
     /// This is set to non-`nil` when a dropped file has been accepted.
-    var droppedFileURL: URL? = nil
+    var currentDroppedFileURL: URL? = nil
     
-    /// Returns the name of the file that was dropped if `droppedFileURL` is non-`nil`,
-    /// `nil` otherwise.
-    var droppedFilename: String? {
-        droppedFileURL?.lastPathComponent
-    }
-    
-    /// Returns the path to the file that was dropped if `droppedFileURL` is non-`nil`,
-    /// `nil` otherwise.
-    var droppedFilePath: String? {
-        droppedFileURL?.filePath
-    }
+    /// The URLs of the files that were dropped onto the app.
+    var droppedFileURLs: [URL] = []
     
     /// Accepts and processing dropped `urls`
     /// - Parameter urls: The `URL`s to the files that were dropped.
     func handleDrop(of urls: [URL]) {
-        for url in urls {
-            let pathExtension = url.pathExtension.lowercased()
-            guard isAudioFileExtension(pathExtension) else {
-                return
+        guard !urls.isEmpty else {
+            return
+        }
+        
+        if urls.count == 1 {
+            currentDroppedFileURL = urls.first
+        } else {
+            let sortedURLs = urls.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
+            for url in sortedURLs {
+                let pathExtension = url.pathExtension.lowercased()
+                guard isAudioFileExtension(pathExtension) else {
+                    return
+                }
+                
+                droppedFileURLs.append(url)
             }
-            
-            droppedFileURL = url
+            currentDroppedFileURL = urls.first
         }
     }
     
     /// Resets to the default state.
     func reset() {
-        droppedFileURL = nil
+        currentDroppedFileURL = nil
     }
 
     // MARK: - Utilities

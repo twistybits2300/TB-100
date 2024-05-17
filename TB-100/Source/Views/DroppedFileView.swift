@@ -7,7 +7,7 @@ struct DroppedFileView: View {
     
     var body: some View {
         VStack {
-            if let fileURL = fileDrop.droppedFileURL {
+            if let fileURL = fileDrop.currentDroppedFileURL {
                 HStack {
                     Text("'\(fileURL.lastPathComponent)' was dropped")
                     Image(systemName: viewModel.playerImageName)
