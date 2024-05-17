@@ -40,6 +40,8 @@ final class RootViewModel {
         fileDrop.droppedAudioFiles.count > 1
     }
     
+    /// The audio files that were dropped onto the app to
+    /// be transcribed.
     var droppedFiles: [DroppedAudioFile] {
         fileDrop.droppedAudioFiles
     }

@@ -9,6 +9,10 @@ final class AudioFileDrop {
     /// The URLs of the files that were dropped onto the app.
     var droppedAudioFiles: [DroppedAudioFile] = []
     
+    /// The file that's currently selected to be transcribed.
+    var selectedFile: UUID?
+    
+    // MARK: - API
     /// Accepts and processing dropped `urls`
     /// - Parameter urls: The `URL`s to the files that were dropped.
     func handleDrop(of urls: [URL]) {
@@ -28,8 +32,28 @@ final class AudioFileDrop {
                 
                 droppedAudioFiles.append(DroppedAudioFile(url: url))
             }
+
             currentDroppedFileURL = urls.first
+            selectedFile = droppedAudioFiles.first?.id
         }
+    }
+    
+    func droppedFile(by id: UUID?) -> DroppedAudioFile? {
+        guard let id = id else {
+            return nil
+        }
+        
+        guard !droppedAudioFiles.isEmpty else {
+            return nil
+        }
+        
+        for file in droppedAudioFiles {
+            if file.id == id {
+                return file
+            }
+        }
+        
+        return nil
     }
     
     /// Resets to the default state.

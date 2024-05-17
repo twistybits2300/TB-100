@@ -4,18 +4,36 @@ import Xscriber
 /// Displayed when the user has dropped an audio file onto the app.
 struct DroppedFileView: View {
     @Environment(\.rootViewModel) var viewModel
+    @State private var selectedFileName: String?
     
     var body: some View {
         VStack {
+            HStack {
+                headerText
+                Image(systemName: viewModel.playerImageName)
+                    .imageScale(.large)
+                    .onTapGesture {
+                        viewModel.togglePlayback()
+                    }
+            }
+        }
+        .onReceive(viewModel.fileDrop.selectedFile.publisher) { selectedFileID in
+            print(String(describing: selectedFileID))
+            if let droppedFile = viewModel.fileDrop.droppedFile(by: selectedFileID) {
+                selectedFileName = droppedFile.fileName
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var headerText: some View {
+        if viewModel.multipleFilesDropped {
+            if let fileName = selectedFileName {
+                Text("'\(fileName)' selected")
+            }
+        } else {
             if let fileURL = fileDrop.currentDroppedFileURL {
-                HStack {
-                    Text("'\(fileURL.lastPathComponent)' was dropped")
-                    Image(systemName: viewModel.playerImageName)
-                        .imageScale(.large)
-                        .onTapGesture {
-                            viewModel.togglePlayback()
-                        }
-                }
+                Text("'\(fileURL.lastPathComponent)' was dropped")
             }
         }
     }

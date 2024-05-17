@@ -1,12 +1,15 @@
 import Foundation
 
 /// Represents an audio file that was dropped onto the app to be transcribed.
-struct DroppedAudioFile: Identifiable {
+struct DroppedAudioFile: Identifiable, Hashable {
     /// The dropped file's url
     let url: URL
     
-    // MARK: - Identifiable
-    var id: String {
-        url.path()
+    /// The dropped file's unique identifier.
+    let id = UUID()
+    
+    /// The dropped audio file's name.
+    var fileName: String {
+        url.lastPathComponent
     }
 }

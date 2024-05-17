@@ -11,9 +11,7 @@ struct RootView: View {
                     HStack {
                         DroppedFilesList()
                         droppedFileTranscriptionView
-                            .border(.red)
                     }
-                    .border(.blue)
                 } else {
                     droppedFileTranscriptionView
                 }
