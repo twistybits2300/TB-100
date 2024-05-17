@@ -44,15 +44,7 @@ private struct TranscriptionStateView: View {
         if viewModel.transcriptionText != nil {
             @Bindable var model = viewModel
             VStack(spacing: 5) {
-                HStack {
-                    Text("Transcribed Text")
-                        .font(.headline)
-                    Image(systemName: copyIconName)
-                        .imageScale(.medium)
-                        .onTapGesture(perform: viewModel.copyTranscribedTextToClipboard)
-                }
-                Text(selectedFilename)
-                    .font(.callout)
+                HeaderView()
                 TextEditor(text: $text)
                     .multilineTextAlignment(.leading)
                     .textSelection(.enabled)
@@ -64,13 +56,36 @@ private struct TranscriptionStateView: View {
             }
         }
     }
+}
 
-    private var selectedFilename: String {
-        viewModel.selectedFilename ?? ""
-    }
-    
-    private var copyIconName: String {
-        viewModel.didCopyToClipboard ? "list.clipboard.fill" : "list.clipboard"
+extension TranscriptionStateView {
+    /// Displays some headline text with an image from which the user can tap to copy
+    /// the current contents of the `TextEditor` to the system clipboard, along with
+    /// the name of the file for which the transcription text is being shown.
+    private struct HeaderView: View {
+        @Environment(\.rootViewModel) var viewModel
+        
+        var body: some View {
+            VStack {
+                HStack {
+                    Text("Transcribed Text")
+                        .font(.headline)
+                    Image(systemName: copyIconName)
+                        .imageScale(.medium)
+                        .onTapGesture(perform: viewModel.copyTranscribedTextToClipboard)
+                }
+                Text(selectedFilename)
+                    .font(.callout)
+            }
+        }
+        
+        private var copyIconName: String {
+            viewModel.didCopyToClipboard ? "list.clipboard.fill" : "list.clipboard"
+        }
+
+        private var selectedFilename: String {
+            viewModel.selectedFilename ?? ""
+        }
     }
 }
 
