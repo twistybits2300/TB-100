@@ -7,9 +7,15 @@ struct RootView: View {
     var body: some View {
         VStack {
             if viewModel.isFileDropped {
-                VStack {
-                    DroppedFileView()
-                    TranscriptionView()
+                if viewModel.multipleFilesDropped {
+                    HStack {
+                        DroppedFilesList()
+                        droppedFileTranscriptionView
+                            .border(.red)
+                    }
+                    .border(.blue)
+                } else {
+                    droppedFileTranscriptionView
                 }
             } else {
                 DropPromptView()
@@ -19,6 +25,14 @@ struct RootView: View {
         .dropDestination(for: URL.self) { urls, _ in
             fileDrop.handleDrop(of: urls)
             return true
+        }
+    }
+    
+    @ViewBuilder
+    private var droppedFileTranscriptionView: some View {
+        VStack {
+            DroppedFileView()
+            TranscriptionView()
         }
     }
     

@@ -7,7 +7,7 @@ final class AudioFileDrop {
     var currentDroppedFileURL: URL? = nil
     
     /// The URLs of the files that were dropped onto the app.
-    var droppedFileURLs: [URL] = []
+    var droppedAudioFiles: [DroppedAudioFile] = []
     
     /// Accepts and processing dropped `urls`
     /// - Parameter urls: The `URL`s to the files that were dropped.
@@ -26,7 +26,7 @@ final class AudioFileDrop {
                     return
                 }
                 
-                droppedFileURLs.append(url)
+                droppedAudioFiles.append(DroppedAudioFile(url: url))
             }
             currentDroppedFileURL = urls.first
         }

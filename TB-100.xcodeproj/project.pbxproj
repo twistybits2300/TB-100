@@ -21,6 +21,8 @@
 		F8FCF4D72BF688AF008F3E02 /* TBCommon in Frameworks */ = {isa = PBXBuildFile; productRef = F8FCF4D62BF688AF008F3E02 /* TBCommon */; };
 		F8FCF4D92BF68E98008F3E02 /* TranscriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FCF4D82BF68E98008F3E02 /* TranscriptionView.swift */; };
 		F8FD0DA32BF77A4B00811AF9 /* TranscribedTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD0DA22BF77A4B00811AF9 /* TranscribedTextView.swift */; };
+		F8FD0DA52BF7968A00811AF9 /* DroppedFilesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD0DA42BF7968A00811AF9 /* DroppedFilesList.swift */; };
+		F8FD0DA72BF7972700811AF9 /* DroppedAudioFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD0DA62BF7972700811AF9 /* DroppedAudioFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		F8FCF4CF2BF67FCD008F3E02 /* AudioFilePlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioFilePlayer.swift; sourceTree = "<group>"; };
 		F8FCF4D82BF68E98008F3E02 /* TranscriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptionView.swift; sourceTree = "<group>"; };
 		F8FD0DA22BF77A4B00811AF9 /* TranscribedTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscribedTextView.swift; sourceTree = "<group>"; };
+		F8FD0DA42BF7968A00811AF9 /* DroppedFilesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppedFilesList.swift; sourceTree = "<group>"; };
+		F8FD0DA62BF7972700811AF9 /* DroppedAudioFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DroppedAudioFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				F8FCF4C52BF66E7C008F3E02 /* AudioFileDrop.swift */,
+				F8FD0DA62BF7972700811AF9 /* DroppedAudioFile.swift */,
 				F8FCF4CF2BF67FCD008F3E02 /* AudioFilePlayer.swift */,
 			);
 			path = "Audio File";
@@ -160,6 +165,7 @@
 				F8FCF4CB2BF67D20008F3E02 /* DropPromptView.swift */,
 				F8FCF4CD2BF67EFB008F3E02 /* DroppedFileView.swift */,
 				F8FCF4D82BF68E98008F3E02 /* TranscriptionView.swift */,
+				F8FD0DA42BF7968A00811AF9 /* DroppedFilesList.swift */,
 				F8FD0DA22BF77A4B00811AF9 /* TranscribedTextView.swift */,
 			);
 			path = Views;
@@ -280,6 +286,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8FD0DA72BF7972700811AF9 /* DroppedAudioFile.swift in Sources */,
 				F867BE5C2BF6631600BF1BC1 /* RootView.swift in Sources */,
 				F8FCF4CE2BF67EFB008F3E02 /* DroppedFileView.swift in Sources */,
 				F867BE5A2BF6631600BF1BC1 /* TB_100App.swift in Sources */,
@@ -288,6 +295,7 @@
 				F8FCF4D02BF67FCD008F3E02 /* AudioFilePlayer.swift in Sources */,
 				F8FCF4D92BF68E98008F3E02 /* TranscriptionView.swift in Sources */,
 				F8FCF4C72BF66E7C008F3E02 /* AudioFileDrop.swift in Sources */,
+				F8FD0DA52BF7968A00811AF9 /* DroppedFilesList.swift in Sources */,
 				F8FCF4CC2BF67D20008F3E02 /* DropPromptView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -34,6 +34,16 @@ final class RootViewModel {
         fileDrop.currentDroppedFileURL != nil
     }
     
+    /// Returns `true` if more than one file was dropped
+    /// onto the app.
+    var multipleFilesDropped: Bool {
+        fileDrop.droppedAudioFiles.count > 1
+    }
+    
+    var droppedFiles: [DroppedAudioFile] {
+        fileDrop.droppedAudioFiles
+    }
+    
     /// Returns the `systemName` to use for the play/stop icon
     /// based on the state of `player`.
     var playerImageName: String {
