@@ -11,12 +11,21 @@ struct TranscriptionView: View {
             DroppedFileView()
             TranscribedTextView()
             Spacer()
-            if viewModel.isSpeechAvailable {
-                Text("recognition permission status: \(viewModel.recognizerStatus)")
-            }
+            footerView
         }
         .onAppear {
             viewModel.requestSpeechRecognitionPermission()
+        }
+    }
+    
+    @ViewBuilder
+    private var footerView: some View {
+        Button(action: viewModel.resetForAnotherDrop) {
+            Label("Reset", systemImage: "arrow.triangle.capsulepath")
+                .imageScale(.large)
+        }
+        if viewModel.isSpeechAvailable {
+            Text("speech recognition permission: \(viewModel.recognizerStatus)")
         }
     }
 }

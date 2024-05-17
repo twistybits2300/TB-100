@@ -56,10 +56,6 @@ private struct TranscriptionStateView: View {
                         .padding()
                         .border(.gray)
                 }
-                Button(action: viewModel.resetForAnotherDrop) {
-                    Label("Reset", systemImage: "arrow.triangle.capsulepath")
-                        .imageScale(.large)
-                }
             }
         }
     }
