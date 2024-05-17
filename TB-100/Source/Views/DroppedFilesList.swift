@@ -14,7 +14,6 @@ struct DroppedFilesList: View {
                     Text(droppedFile.url.lastPathComponent)
                 }
             }
-            .frame(maxHeight: .infinity)
         }
     }
 }

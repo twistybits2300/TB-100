@@ -1,7 +1,7 @@
 import Foundation
 
-@Observable
 /// Oversees dropping of audio files onto the app.
+@Observable
 final class AudioFileDrop {
     /// The URLs of the files that were dropped onto the app.
     var droppedAudioFiles: [DroppedAudioFile] = []

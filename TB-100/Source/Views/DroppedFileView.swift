@@ -18,9 +18,8 @@ struct DroppedFileView: View {
             }
         }
         .onReceive(viewModel.fileDrop.selectedFileID.publisher) { selectedFileID in
-            print(String(describing: selectedFileID))
             if let droppedFile = viewModel.fileDrop.droppedFile(by: selectedFileID) {
-                selectedFileName = droppedFile.fileName
+                selectedFileName = droppedFile.filename
             }
         }
     }

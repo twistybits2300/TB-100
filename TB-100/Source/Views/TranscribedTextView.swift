@@ -19,15 +19,18 @@ private struct TranscribeButton: View {
     @Environment(\.rootViewModel) var viewModel
     
     var body: some View {
-        if showButton {
-            Button(action: viewModel.transcribeAudio) {
-                Label("Transcribe", systemImage: "waveform")
-            }
+        Button(action: viewModel.transcribeAudio) {
+            Label(buttonText, systemImage: "waveform")
         }
+        .disabled(isDisabled)
+    }
+
+    private var buttonText: String {
+        viewModel.isTranscribing ? "transcribing…" : "Transcribe"
     }
     
-    private var showButton: Bool {
-        viewModel.isTranscribing == false && viewModel.transcriptionText == nil
+    private var isDisabled: Bool {
+        return viewModel.isTranscribing
     }
 }
 
@@ -35,35 +38,43 @@ private struct TranscribeButton: View {
 /// when it's completed the text captured from the transcription.
 private struct TranscriptionStateView: View {
     @Environment(\.rootViewModel) var viewModel
+    @State private var text = ""
     
     var body: some View {
-        if viewModel.isTranscribing {
-            Text("transcribing…")
-                .font(.title2)
-        } else if let text = viewModel.transcriptionText {
+        if viewModel.transcriptionText != nil {
+            @Bindable var model = viewModel
             VStack(spacing: 5) {
                 HStack {
                     Text("Transcribed Text")
-                        .font(.title3)
+                        .font(.headline)
                     Image(systemName: copyIconName)
                         .imageScale(.medium)
                         .onTapGesture(perform: viewModel.copyTranscribedTextToClipboard)
                 }
-                ScrollView {
-                    Text(text)
-                        .multilineTextAlignment(.leading)
-                        .textSelection(.enabled)
-                        .padding()
-                        .border(.gray)
-                }
+                Text(selectedFilename)
+                    .font(.callout)
+                TextEditor(text: $text)
+                    .multilineTextAlignment(.leading)
+                    .textSelection(.enabled)
+                    .padding()
+            }
+            .onReceive(viewModel.transcriptionText.publisher) { value in
+                self.text = value
+                viewModel.onTranscriptionTextChanged(text: value)
             }
         }
+    }
+
+    private var selectedFilename: String {
+        viewModel.selectedFilename ?? ""
     }
     
     private var copyIconName: String {
         viewModel.didCopyToClipboard ? "list.clipboard.fill" : "list.clipboard"
     }
 }
+
+// MARK: - Preview
 #Preview {
     TranscribedTextView()
 }

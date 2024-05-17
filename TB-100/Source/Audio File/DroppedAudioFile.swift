@@ -9,7 +9,7 @@ struct DroppedAudioFile: Identifiable, Hashable {
     let id = UUID()
     
     /// The dropped audio file's name.
-    var fileName: String {
+    var filename: String {
         url.lastPathComponent
     }
 }

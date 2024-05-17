@@ -5,6 +5,8 @@ import TBCommon
 @Observable
 /// View model serving the `RootView`
 final class RootViewModel {
+    static let shared = RootViewModel()
+    
     /// Handles drops of an audio file.
     var fileDrop = AudioFileDrop()
     
@@ -18,9 +20,14 @@ final class RootViewModel {
     /// to the clipboard.
     var didCopyToClipboard: Bool = false
     
+    /// The filename of the currently selected dropped file.
+    var selectedFilename: String?
+    private var previousTranscribedText: String?
+    
     // MARK: - Initialization
     /// Default initializer.
-    init() {
+    private init() {
+        print("RootViewModel initializing")
         do {
             self.transcriber = try AudioFileTranscriber()
         } catch {
@@ -55,11 +62,7 @@ final class RootViewModel {
     /// Returns `true` if we're currently transcribing the text
     /// from a dropped audio file.
     var isTranscribing: Bool {
-        guard let transcriber = transcriber else {
-            return false
-        }
-        
-        return transcriber.isTranscribing
+        transcriber?.isTranscribing ?? false
     }
     
     /// Returns `true` if speech recognition services are available
@@ -143,11 +146,27 @@ final class RootViewModel {
         didCopyToClipboard = true
     }
     
+    /// Resets to a default state, ready to accept another drop of files.
     func resetForAnotherDrop() {
         fileDrop.reset()
         player.reset()
         transcriber?.reset()
         didCopyToClipboard = false
+    }
+    
+    /// Called when the transcription text has changed.
+    /// - Parameter text: The new transcription text.
+    ///
+    /// We'll update the `selectedFilename` when the transcription text
+    /// has changed.
+    func onTranscriptionTextChanged(text: String) {
+        if text != previousTranscribedText {
+            let fileID = fileDrop.selectedFileID
+            if let fileInfo = fileDrop.droppedFile(by: fileID) {
+                selectedFilename = fileInfo.filename
+            }
+            previousTranscribedText = text
+        }
     }
 }
 
@@ -160,7 +179,7 @@ extension EnvironmentValues {
 
     private struct RootViewModelKey: EnvironmentKey {
         static var defaultValue: RootViewModel {
-            .init()
+            RootViewModel.shared
         }
     }
 }
