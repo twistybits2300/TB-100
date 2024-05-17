@@ -7,45 +7,9 @@ struct TranscriptionView: View {
     
     var body: some View {
         VStack {
-            if viewModel.transcriptionText == nil {
-                Button(action: viewModel.transcribeAudio) {
-                    Label("Transcribe", systemImage: "waveform")
-                }
-                .disabled(viewModel.isTranscribing)
-            } else {
-                Button(action: viewModel.resetForAnotherDrop) {
-                    Label("Reset", systemImage: "x.square.fill")
-                }
-            }
-
+            TranscriptionButtons()
             Spacer()
-            Group {
-                if viewModel.isTranscribing {
-                    Text("transcribing…")
-                        .font(.title2)
-                } else if let text = viewModel.transcriptionText {
-                    VStack(spacing: 5) {
-                        Text("Transcribed Text")
-                            .font(.title3)
-                        ScrollView {
-                            Text(text)
-                                .multilineTextAlignment(.leading)
-                                .textSelection(.enabled)
-                                .padding()
-                                .border(.gray)
-                        }
-                        Image(systemName: "list.clipboard.fill")
-                            .imageScale(.large)
-                            .onTapGesture {
-                                viewModel.copyTranscribedTextToClipboard()
-                            }
-                        Text(copyToClipboardText)
-                            .font(.caption)
-                    }
-                }
-            }
-            .frame(maxWidth: 500)
-
+            TranscribedTextView()
             Spacer()
             if viewModel.isSpeechAvailable {
                 Text("recognition permission status: \(viewModel.recognizerStatus)")
@@ -55,12 +19,9 @@ struct TranscriptionView: View {
             viewModel.requestSpeechRecognitionPermission()
         }
     }
-    
-    private var copyToClipboardText: String {
-        viewModel.didCopyToClipboard ? "copied to clipboard" : "copy to clipboard"
-    }
 }
 
+// MARK: - Preview
 #Preview {
     TranscriptionView()
 }
