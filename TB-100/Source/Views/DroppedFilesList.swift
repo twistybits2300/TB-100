@@ -9,7 +9,7 @@ struct DroppedFilesList: View {
         VStack {
             @Bindable var model = viewModel
             Text("dropped files")
-            List(selection: $model.fileDrop.selectedFile) {
+            List(selection: $model.fileDrop.selectedFileID) {
                 ForEach(viewModel.droppedFiles) { droppedFile in
                     Text(droppedFile.url.lastPathComponent)
                 }

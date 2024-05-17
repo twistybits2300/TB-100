@@ -3,15 +3,17 @@ import Foundation
 @Observable
 /// Oversees dropping of audio files onto the app.
 final class AudioFileDrop {
-    /// This is set to non-`nil` when a dropped file has been accepted.
-    var currentDroppedFileURL: URL? = nil
-    
     /// The URLs of the files that were dropped onto the app.
     var droppedAudioFiles: [DroppedAudioFile] = []
     
     /// The file that's currently selected to be transcribed.
-    var selectedFile: UUID?
+    var selectedFileID: UUID?
     
+    /// The currently selected dropped file. May be `nil`.
+    var selectedDroppedFile: DroppedAudioFile? {
+        droppedFile(by: selectedFileID)
+    }
+
     // MARK: - API
     /// Accepts and processing dropped `urls`
     /// - Parameter urls: The `URL`s to the files that were dropped.
@@ -21,7 +23,11 @@ final class AudioFileDrop {
         }
         
         if urls.count == 1 {
-            currentDroppedFileURL = urls.first
+            if let url = urls.first {
+                let droppedFile = DroppedAudioFile(url: url)
+                droppedAudioFiles.append(droppedFile)
+                selectedFileID = droppedFile.id
+            }
         } else {
             let sortedURLs = urls.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
             for url in sortedURLs {
@@ -33,11 +39,13 @@ final class AudioFileDrop {
                 droppedAudioFiles.append(DroppedAudioFile(url: url))
             }
 
-            currentDroppedFileURL = urls.first
-            selectedFile = droppedAudioFiles.first?.id
+            selectedFileID = droppedAudioFiles.first?.id
         }
     }
     
+    /// Returns the dropped audio file matching the given `id`.
+    /// - Parameter id: The identifier to search for.
+    /// - Returns: The matching file info if found, `nil` otherwise.
     func droppedFile(by id: UUID?) -> DroppedAudioFile? {
         guard let id = id else {
             return nil
@@ -58,7 +66,8 @@ final class AudioFileDrop {
     
     /// Resets to the default state.
     func reset() {
-        currentDroppedFileURL = nil
+        selectedFileID = nil
+        droppedAudioFiles = []
     }
 
     // MARK: - Utilities

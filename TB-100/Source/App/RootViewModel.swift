@@ -31,7 +31,7 @@ final class RootViewModel {
     /// Returns `true` if the user has dropped an audio
     /// file onto the app and it has been accepted.
     var isFileDropped: Bool {
-        fileDrop.currentDroppedFileURL != nil
+        fileDrop.selectedFileID != nil || multipleFilesDropped
     }
     
     /// Returns `true` if more than one file was dropped
@@ -106,7 +106,7 @@ final class RootViewModel {
         if player.isPlaying {
             player.stop()
         } else {
-            player.play(fileURL: fileDrop.currentDroppedFileURL)
+            player.play(fileURL: fileDrop.selectedDroppedFile?.url)
         }
     }
     
@@ -119,7 +119,7 @@ final class RootViewModel {
     /// Assuming an audio file has been dropped, kicks
     /// off the transcription of the text from that file.
     func transcribeAudio() {
-        guard let fileURL = fileDrop.currentDroppedFileURL else {
+        guard let fileURL = fileDrop.selectedDroppedFile?.url else {
             return
         }
         

@@ -17,7 +17,7 @@ struct DroppedFileView: View {
                     }
             }
         }
-        .onReceive(viewModel.fileDrop.selectedFile.publisher) { selectedFileID in
+        .onReceive(viewModel.fileDrop.selectedFileID.publisher) { selectedFileID in
             print(String(describing: selectedFileID))
             if let droppedFile = viewModel.fileDrop.droppedFile(by: selectedFileID) {
                 selectedFileName = droppedFile.fileName
@@ -32,10 +32,14 @@ struct DroppedFileView: View {
                 Text("'\(fileName)' selected")
             }
         } else {
-            if let fileURL = fileDrop.currentDroppedFileURL {
+            if let fileURL = selectedFile?.url {
                 Text("'\(fileURL.lastPathComponent)' was dropped")
             }
         }
+    }
+    
+    private var selectedFile: DroppedAudioFile? {
+        fileDrop.selectedDroppedFile
     }
     
     private var fileDrop: AudioFileDrop {
