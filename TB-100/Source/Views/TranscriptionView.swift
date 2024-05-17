@@ -8,6 +8,7 @@ struct TranscriptionView: View {
     var body: some View {
         VStack {
             Spacer()
+            DroppedFileView()
             TranscribedTextView()
             Spacer()
             if viewModel.isSpeechAvailable {
